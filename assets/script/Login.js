@@ -13,21 +13,15 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+
+        
+        loginType: 0,
+
+        register:{
+            default:null,
+            type : cc.Button
+
+        },
 
         Name: {
             default: null,
@@ -37,9 +31,14 @@ cc.Class({
             default: null,
             type: cc.EditBox
         },
-
+        label:{
+            default:null,
+            type : cc.Label
+        },
 
     },
+
+
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -63,28 +62,39 @@ cc.Class({
         return this.Pwd.string;
     },
 
+    cleanAcount(){
+        this.Name.string = null;
+    },
 
+    cleanPwd(){
+        this.Name.Pwd = null;
+    },
 
     login(){
 
-        if(this.isEmpty(this.getUserName(),this.getPassword())){
-            //this.msgBoxHandler.preAutoHide(this.emptyText);
-            alert("Either acount or password is empty!");
-             return;
-        }else{
-            //connect();
-            //socket.emit('login',{
-            //    userName : this.getUserName(),
-            //    password : this.getPassword(),
-            //});
-            var data = {
-                "type" : 1,
-                "id": this.getUserName(),
-                "password": this.getPassword(),
-            };
-            this.send(JSON.stringify(data));
-            alert(JSON.stringify(data));            
+        if(this.loginType == 1){ //登录
+            if(this.isEmpty(this.getUserName(),this.getPassword())){
+                alert("Either acount or password is empty!");
+                 return;
+            }else{
+                var data = {
+                    "type" : 1,
+                    "id": this.getUserName(),
+                    "password": this.getPassword(),
+                };
+                this.send(JSON.stringify(data));
+                alert(JSON.stringify(data));     
+                //cc.game.addPersistRootNode("Login");       
+                //cc.director.loadScene("ChooseChar");
+            }
+        }else if(this.loginType == 2){   //返回登录界面
+            alert("backtologin");   
+            //backtoLogin();
+            this.label.string = "登录";
+            this.register.getComponent("Register").label.string = "注册账号";
+
         }
+
     },
 
     connect(){
@@ -115,12 +125,20 @@ cc.Class({
 
     onLoad(){
         this.connect();
-
+        this.loginType = 1;
     },
 
     start () {
 
     },
+
+    backtoLogin(){
+        this.label.string = "登录";
+        this.register.getComponent("Register").label.string = "注册账号";
+
+    },
+
+
 
 
     // update (dt) {},
