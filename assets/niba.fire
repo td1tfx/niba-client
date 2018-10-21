@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.28169922828674315,
-      "y": 0.28169922828674315,
+      "x": 0.2856250047683716,
+      "y": 0.2856250047683716,
       "z": 1
     },
     "_quat": {
@@ -54,7 +54,8 @@
     },
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "c7wmqTn6FOV560WgOCYI3F"
+    "autoReleaseAssets": false,
+    "_id": "f3f8567b-8025-4a1a-8854-fe9ae951f9b0"
   },
   {
     "__type__": "cc.Node",
@@ -90,10 +91,10 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 39
+        "__id__": 41
       },
       {
-        "__id__": 40
+        "__id__": 42
       }
     ],
     "_prefab": null,
@@ -811,8 +812,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": true,
-    "_string": "username",
-    "_N$string": "username",
+    "_string": "account",
+    "_N$string": "account",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -1355,7 +1356,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "account",
+    "_string": "password",
     "_tabIndex": 0,
     "editingDidBegan": [],
     "textChanged": [],
@@ -1438,7 +1439,10 @@
         "__id__": 37
       },
       {
-        "__id__": 38
+        "__id__": 39
+      },
+      {
+        "__id__": 40
       }
     ],
     "_prefab": null,
@@ -1626,7 +1630,11 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 38
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -1667,6 +1675,15 @@
     "_id": "91eBw0Q1dPB40Ui/rWwi7O"
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 33
+    },
+    "component": "Login",
+    "handler": "login",
+    "customEventData": "1"
+  },
+  {
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
@@ -1694,6 +1711,22 @@
     "_id": "e4nzUB/QNDf7A+yPhS0soI"
   },
   {
+    "__type__": "8c62ak2MnxM27cgwbuCI7dU",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 33
+    },
+    "_enabled": true,
+    "Name": {
+      "__id__": 21
+    },
+    "Pwd": {
+      "__id__": 31
+    },
+    "_id": "85lDVwNOZBm79AzU/x+4np"
+  },
+  {
     "__type__": "cc.Canvas",
     "_name": "",
     "_objFlags": 0,
@@ -1718,6 +1751,12 @@
       "__id__": 2
     },
     "_enabled": true,
+    "Name": {
+      "__id__": 21
+    },
+    "Pwd": {
+      "__id__": 31
+    },
     "_id": "066S/+B6JP+Jay+Knw571z"
   }
 ]

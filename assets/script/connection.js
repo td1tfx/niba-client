@@ -8,6 +8,7 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
+
 cc.Class({
     extends: cc.Component,
 
@@ -27,32 +28,31 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        
+        Name: {
+            default: null,
+            type: cc.EditBox
+        },
+        Pwd: {
+            default: null,
+            type: cc.EditBox
+        },
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        var ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
-        ws.onopen = function (evt) {
-            console.log("onopen");
-            alert("success");
-        }
-        ws.onerror = function (evt) {
-            console.log("onerror");
-            console.log(evt);
-            alert("error");
-        }
-        ws.onclose = function (evt) {
-            console.log("onclose");
-            console.log(evt);
-            alert("onclose");
-        }
+        //var ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
 
     },
+
 
     start () {
 
     },
+
+
 
     // update (dt) {},
 });
