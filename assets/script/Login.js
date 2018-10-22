@@ -8,7 +8,7 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
-var ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
+
 cc.Class({
     extends: cc.Component,
 
@@ -78,7 +78,7 @@ cc.Class({
                  return;
             }else{
                 var data = {
-                    "type" : 1,
+                    "type" : 2,
                     "id": this.getUserName(),
                     "password": this.getPassword(),
                 };
@@ -92,39 +92,22 @@ cc.Class({
             //backtoLogin();
             this.label.string = "登录";
             this.register.getComponent("Register").label.string = "注册账号";
-
+            this.register.getComponent("Register").clickType = 1;
+            this.register.getComponent("Register").CPwd.node.active = false;
+            this.register.getComponent("Register").CPwd_text.node.active = false;
         }
 
     },
 
-    connect(){
- 
-        ws.onopen = function (evt) {
-            console.log("onopen");
-            alert("success");
-            ws.readyState = 1;
-        }
-        ws.onerror = function (evt) {
-            console.log("onerror");
-            console.log(evt);
-            alert("error");
-        }
-        ws.onclose = function (evt) {
-            console.log("onclose");
-            console.log(evt);
-            alert("onclose");
-        }
 
-    },
 
     send(msg){
-        if(ws.readyState == 1){
-            ws.send(msg);
+        if(window.ws.readyState == 1){
+            window.ws.send(msg);
         }
     },
 
     onLoad(){
-        this.connect();
         this.loginType = 1;
     },
 

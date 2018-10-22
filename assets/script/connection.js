@@ -8,6 +8,8 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
+window.ws;
+window.ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
 
 cc.Class({
     extends: cc.Component,
@@ -42,9 +44,29 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        //var ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
+    connect(){
+ 
+        window.ws.onopen = function (evt) {
+            console.log("onopen");
+            alert("success");
+            ws.readyState = 1;
+        }
+        window.ws.onerror = function (evt) {
+            console.log("onerror");
+            console.log(evt);
+            alert("error");
+        }
+        window.ws.onclose = function (evt) {
+            console.log("onclose");
+            console.log(evt);
+            alert("onclose");
+        }
 
+    },
+
+    onLoad () {
+  
+        this.connect();
     },
 
 
