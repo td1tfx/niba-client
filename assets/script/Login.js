@@ -84,17 +84,18 @@ cc.Class({
                 };
                 this.send(JSON.stringify(data));
                 alert(JSON.stringify(data));     
-                //cc.game.addPersistRootNode("Login");       
-                //cc.director.loadScene("ChooseChar");
+                window.ws.onmessage = function(evt){
+                    //alert("收到不知道Json格式的消息，服务器返回消息如下：");   
+                    alert(evt.data);    
+                    var msg = JSON.parse(evt.data);
+                    alert(msg.success);
+                    alert("跳转场景到角色选择："); 
+                    //cc.game.addPersistRootNode("Login");       
+                   //cc.director.loadScene("ChooseChar");
+                }
             }
         }else if(this.loginType == 2){   //返回登录界面
-            alert("backtologin");   
-            //backtoLogin();
-            this.label.string = "登录";
-            this.register.getComponent("Register").label.string = "注册账号";
-            this.register.getComponent("Register").clickType = 1;
-            this.register.getComponent("Register").CPwd.node.active = false;
-            this.register.getComponent("Register").CPwd_text.node.active = false;
+            this.jumpToLogin();
         }
 
     },
@@ -115,11 +116,16 @@ cc.Class({
 
     },
 
-    backtoLogin(){
+    jumpToLogin(){
         this.label.string = "登录";
         this.register.getComponent("Register").label.string = "注册账号";
+        this.register.getComponent("Register").clickType = 1;
+        this.register.getComponent("Register").CPwd.node.active = false;
+        this.register.getComponent("Register").CPwd_text.node.active = false;
+        this.loginType = 1;
 
     },
+
 
 
 
