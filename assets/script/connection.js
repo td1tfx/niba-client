@@ -9,7 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 window.ws;
-window.ws = new WebSocket("wss://localhost:19999", "niba-server", cc.url.raw("../resources/server.crt"));
+window.ws = new WebSocket("wss://localhost:19999", "niba-server", cc.loader.loadRes("server.crt"));
 
 cc.Class({
     extends: cc.Component,
