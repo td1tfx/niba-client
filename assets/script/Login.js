@@ -1,134 +1,113 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
+var Message = require('message')
+var session = require('session')
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-
-        
-        loginType: 0,
-
-        register:{
-            default:null,
-            type : cc.Button
-
-        },
-
-        Name: {
+        userNameBox: {
             default: null,
             type: cc.EditBox
         },
-        Pwd: {
+        passwordBox: {
             default: null,
             type: cc.EditBox
         },
-        label:{
-            default:null,
-            type : cc.Label
+        confirmPasswordBox: {
+            default: null,
+            type: cc.EditBox
+        },     
+        confirmPasswordLabel: {
+            default: null,
+            type: cc.Label
         },
-
+        loginBtn: {
+            default: null,
+            type: cc.Button
+        },
+        registerNewBtn: {
+            default: null,
+            type: cc.Button
+        },
+        registerBtn: {
+            default: null,
+            type: cc.Button
+        }
     },
-
-
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
-    isEmpty(userName,password){
-        
-        console.log(userName);
-        console.log(password);
-
-        if(userName == '' || password == '') return true;
-        //if(userName[0] == '请') return true;
-        return false;
-    },
-
-    getUserName(){
-        return this.Name.string;
+    setRegister(bool) {
+        // set register to empty 
+        this.registerBtn.node.active = bool;
+        this.confirmPasswordBox.node.active = bool;
+        this.confirmPasswordLabel.node.active = bool;
+        this.registerNewBtn.node.active = !bool;
+        this.loginBtn.node.active = !bool;
+        this.userNameBox.string = '';
+        this.passwordBox.string = '';
+        this.confirmPasswordBox.string = '';
     },
     
-    getPassword(){
-        return this.Pwd.string;
+    onLoad() {
+        // while loading the properties aren't initialized LOL what a trash editor
     },
 
-    cleanAcount(){
-        this.Name.string = null;
+    registerNew() {
+        this.setRegister(true);
     },
 
-    cleanPwd(){
-        this.Name.Pwd = null;
-    },
-
-    login(){
-
-        if(this.loginType == 1){ //登录
-            if(this.isEmpty(this.getUserName(),this.getPassword())){
-                alert("Either acount or password is empty!");
-                 return;
-            }else{
-                var data = {
-                    "type" : 2,
-                    "id": this.getUserName(),
-                    "password": this.getPassword(),
-                };
-                this.send(JSON.stringify(data));
-                alert(JSON.stringify(data));     
-                window.ws.onmessage = function(evt){
-                    //alert("收到不知道Json格式的消息，服务器返回消息如下：");   
-                    alert(evt.data);    
-                    var msg = JSON.parse(evt.data);
-                    alert(msg.success);
-                    alert("跳转场景到角色选择："); 
-                    //cc.game.addPersistRootNode("Login");       
-                   //cc.director.loadScene("ChooseChar");
+    register() {
+        if (this.passwordBox.string != this.confirmPasswordBox.string) {
+            alert("密码不匹配");
+            return;
+        }
+        var regRequest = Message.RegisterRequest(this.userNameBox.string, this.passwordBox.string);
+        // pass session? TBD
+        var validate = regRequest.validate();
+        if (validate.status) {
+            session.socket.onmessage = (evt) => {
+                var response = JSON.parse(evt.data)
+                // could be reponse.error
+                if ('error' in response) {
+                    alert("未知错误" + response.error);
+                    return;
                 }
-            }
-        }else if(this.loginType == 2){   //返回登录界面
-            this.jumpToLogin();
-        }
-
-    },
-
-
-
-    send(msg){
-        if(window.ws.readyState == 1){
-            window.ws.send(msg);
+                if (response.success) {
+                    alert("注册角色成功，跳转登陆界面……");
+                    this.setRegister(false);
+                } else {
+                    this.alert("用户名被取用");
+                }
+            };
+            session.socket.send(JSON.stringify(regRequest));
+        } else {
+            alert(validate.message);
         }
     },
 
-    onLoad(){
-        this.loginType = 1;
-    },
-
-    start () {
-
-    },
-
-    jumpToLogin(){
-        this.label.string = "登录";
-        this.register.getComponent("Register").label.string = "注册账号";
-        this.register.getComponent("Register").clickType = 1;
-        this.register.getComponent("Register").CPwd.node.active = false;
-        this.register.getComponent("Register").CPwd_text.node.active = false;
-        this.loginType = 1;
-
-    },
-
-
-
-
+    login() {
+        var loginRequest = Message.LoginRequest(this.userNameBox.string, this.passwordBox.string)
+        var validate = loginRequest.validate();
+        if (validate.status) {
+            session.socket.onmessage = (evt) => {
+                var response = JSON.parse(evt.data)
+                // could be reponse.error
+                if ('error' in response) {
+                    alert("未知错误" + response.error);
+                    return;
+                }
+                if (response.success) {
+                    alert("角色登陆成功");
+                    // transition to next scene
+                    this.loginBtn.node.active = false;
+                    this.registerNewBtn.node.active = false;
+                } else {
+                    alert("账号密码错误");
+                }
+            };
+            session.socket.send(JSON.stringify(loginRequest));
+        } else {
+            alert(validate.message);
+        }
+    }
 
     // update (dt) {},
 });
