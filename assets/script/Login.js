@@ -32,17 +32,23 @@ cc.Class({
         registerBtn: {
             default: null,
             type: cc.Button
+        },
+        returnBtn: {
+            default: null,
+            type: cc.Button
         }
     },
     setRegister(bool) {
-        // set register to empty 
         this.registerBtn.node.active = bool;
         this.confirmPasswordBox.node.active = bool;
         this.confirmPasswordLabel.node.active = bool;
+        this.returnBtn.node.active = bool;
         this.registerNewBtn.node.active = !bool;
         this.loginBtn.node.active = !bool;
-        this.userNameBox.string = '';
-        this.passwordBox.string = '';
+        if (!bool) {
+            this.userNameBox.string = '';
+            this.passwordBox.string = '';
+        }
         this.confirmPasswordBox.string = '';
     },
     
@@ -52,6 +58,10 @@ cc.Class({
 
     registerNew() {
         this.setRegister(true);
+    },
+
+    backToLogin() {
+        this.setRegister(false);
     },
 
     register() {
@@ -74,7 +84,7 @@ cc.Class({
                     alert("注册角色成功，跳转登陆界面……");
                     this.setRegister(false);
                 } else {
-                    this.alert("用户名被取用");
+                    alert("用户名被取用");
                 }
             };
             session.socket.send(JSON.stringify(regRequest));
