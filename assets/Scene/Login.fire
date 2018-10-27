@@ -1526,8 +1526,8 @@
     "_id": "247Aoa5kpDH73UtldJ3Ypw"
   },
   {
-    "__type__": "cc.Button",
-    "_name": "",
+    "__type__": "cc.Node",
+    "_name": "PswdBox",
     "_objFlags": 0,
     "node": {
       "__id__": 30
@@ -1686,7 +1686,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 160,
       "height": 40
     },
     "_anchorPoint": {
@@ -1814,13 +1814,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 158,
       "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
+      "x": 0,
+      "y": 1
     },
     "_position": {
       "__type__": "cc.Vec3",
@@ -1850,8 +1850,8 @@
     "_id": "39PoMqdsRCsI0VP04lxhQg"
   },
   {
-    "__type__": "cc.Node",
-    "_name": "BACKGROUND_SPRITE",
+    "__type__": "cc.Label",
+    "_name": "",
     "_objFlags": 0,
     "_parent": {
       "__id__": 41
@@ -2040,8 +2040,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": true,
-    "_string": "password",
-    "_N$string": "password",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2062,7 +2062,7 @@
       "__id__": 41
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -2122,12 +2122,12 @@
     "node": {
       "__id__": 47
     },
-    "_enabled": true,
+    "_enabled": false,
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": true,
-    "_string": "please enter your password",
-    "_N$string": "please enter your password",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2185,7 +2185,16 @@
     },
     "_N$maxLength": 24,
     "_N$stayOnTop": false,
-    "_id": "75Rzd8iC9GbJ+c7O1bAlQL"
+    "_id": "fda9wEUNlChLNDT/inWg6j"
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 30
+    },
+    "component": "Login",
+    "handler": "cleanPwd",
+    "customEventData": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -2645,14 +2654,78 @@
     "_id": "76tLVzDbFP6oWXrP6LI2fX"
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Node",
+    "_name": "BACKGROUND_SPRITE",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 41
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 43
+      },
+      {
+        "__id__": 44
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 160,
+      "height": 40
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "groupIndex": 0,
+    "_id": "98ccl7vHZA4J7A4i8TF+zI"
+  },
+  {
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 60
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "注册",
