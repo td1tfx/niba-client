@@ -38,6 +38,7 @@ cc.Class({
             type: cc.Button
         }
     },
+    
     setRegister(bool) {
         this.registerBtn.node.active = bool;
         this.confirmPasswordBox.node.active = bool;
