@@ -2,7 +2,6 @@
 var session = {
     socket: null,
     // other session specific data goes here
-    id: null,
     connect() {
         this.socket = new WebSocket("wss://localhost:19999", "niba-server", cc.loader.loadRes("server.crt"));
         this.socket.onopen = (evt) => {
@@ -17,6 +16,6 @@ var session = {
     }
 }
 
-session.connect()
+session.connect();
 
 module.exports = session;

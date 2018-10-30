@@ -5,7 +5,7 @@ var Result = (status, message) => {
     };
 };
 
-var Message = {    
+var Message = {
     LoginRequest(id, password) {
         return {
             type: 0,

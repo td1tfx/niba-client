@@ -1,5 +1,5 @@
-var Message = require('message')
-var session = require('session')
+var Message = require('NibaMessage')
+var session = require('NibaSession')
 
 cc.Class({
     extends: cc.Component,
