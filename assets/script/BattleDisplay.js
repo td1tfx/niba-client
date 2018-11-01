@@ -1,12 +1,9 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var strM = require('StringManager')
+
+var green = "#00ff00"
+var blue = "#0fffff"
+var red = "#FF0000"
+var gold = "#D9D919"
 
 cc.Class({
     extends: cc.Component,
@@ -29,9 +26,15 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        var damage = 9999;
         this.items = [];
         for (var i = 0; i< 30; i++){
-            this.addItem(i.toString()+"你看我说这么瞎搞，你说这么瞎搞搞搞可否？不可以怎么瞎搞才可以？");
+            var str_niba = strM.setColor(green,"泥巴");
+            var str_wudi = strM.setColor(blue,"无敌");
+            var str_jiqimao = strM.setColor(green,"机器猫");
+            var str_wugong = strM.setColor(gold,"独孤九剑");
+            var str_damage = strM.setColor(red, damage.toString());
+            this.addItem(i.toString()+ "." +str_wudi + "的" + str_niba + "施展武功" + str_wugong + "给予" + str_jiqimao + str_damage+ "点伤害！");
         }
         //alert(this.items.length);
         this.updateDisplay();
@@ -41,12 +44,15 @@ cc.Class({
 
     },
 
+    
+
     addItem:function(item_string){
         while(this.items.length >= this.max_item_num){
             this.items.pop();
         }
         var m_item = cc.instantiate(this.item);
-        m_item.getComponent(cc.Label).string = item_string;
+        m_item.getComponent(cc.RichText).string = item_string;
+        m_item.getComponent(cc.RichText).maxWidth = this.content.node.width;
         //m_item.getComponent(cc.Widget).left = 0;
         //m_item.getComponent(cc.Widget).right = 0;
         this.items.push(m_item);

@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.26875,
-      "y": 0.26875,
+      "x": 0.944887453198951,
+      "y": 0.944887453198951,
       "z": 1
     },
     "_quat": {
@@ -521,7 +521,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 415,
-      "height": 40
+      "height": 25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -678,7 +678,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 415,
-      "height": 40
+      "height": 25
     },
     "_resize": 1,
     "_N$layoutType": 2,
@@ -819,7 +819,7 @@
     "_enabled": true,
     "max_item_num": 100,
     "item": {
-      "__uuid__": "8ee04110-d2e8-4380-9d11-0072073044f5"
+      "__uuid__": "dd677541-c567-480c-a93d-eb2bd6df10a6"
     },
     "content": {
       "__id__": 15
