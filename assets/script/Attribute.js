@@ -110,6 +110,22 @@ cc.Class({
             type: cc.Label,
             default: null
         },
+        strengthLabel: {
+            type: cc.Label,
+            default: null
+        },
+        dexterityLabel: {
+            type: cc.Label,
+            default: null
+        },
+        physiqueLabel: {
+            type: cc.Label,
+            default: null
+        },
+        spiritLabel: {
+            type: cc.Label,
+            default: null
+        },
         stats: null,
         strength: 0,
         dexterity: 0,
@@ -127,7 +143,7 @@ cc.Class({
 
     onLoad () {
         // it's unclear to me how we could model this such that
-        // 1. initialize with different attributes
+        // 1. initialize with different attributes (then compute, which is easy)
         // 2. append stats 
 
     },
@@ -190,29 +206,35 @@ cc.Class({
     },
 
     update (dt) {
-        this.hp.string = this.stats.hp.toString() + ' ';
-        this.mp.string = this.stats.mp.toString() + ' ';
-        this.dmgRange.string = this.stats.minDmg.toString() + "~" + this.stats.maxDmg.toString()+ ' ';
-        this.innerPower.string = this.stats.innerPower.toString()+ ' ';
-        this.accuracy.string = this.stats.accuracy.toString()+ ' ';
-        this.evasion.string = this.stats.evasion.toString()+ ' ';
-        this.speed.string = this.stats.speed.toString()+ ' ';
-        this.defence.string = this.stats.defence.toString()+ ' ';
-        this.critChance.string = this.stats.critChance.toString() + "%";
-        this.critDamage.string = this.stats.critDamage.toString() + "%";
-        this.reduceDef.string = this.stats.reduceDef.toString()+ ' ';
-        this.reduceDefPerc.string = this.stats.reduceDefPerc.toString() + "%";
-        this.hpRegen.string = this.stats.hpRegen.toString()+ ' ';
-        this.mpRegen.string = this.stats.mpRegen.toString()+ ' ';
-        this.goldRes.string = this.stats.goldRes.toString()+ ' ';
-        this.woodRes.string = this.stats.woodRes.toString()+ ' ';
-        this.waterRes.string = this.stats.waterRes.toString()+ ' ';
-        this.fireRes.string = this.stats.fireRes.toString()+ ' ';
-        this.earthRes.string = this.stats.earthRes.toString()+ ' ';
-        this.hpOnHit.string = this.stats.hpOnHit.toString()+ ' ';
-        this.hpSteal.string = this.stats.hpSteal.toString() + "%";
-        this.mpOnHit.string = this.stats.mpOnHit.toString()+ ' ';
-        this.mpSteal.string = this.stats.mpSteal.toString() + "%"; 
-        this.remaining.string = (this.assignable - this.used).toString()+ ' ';
+        this.hp.string = this.stats.hp + ' ';
+        this.mp.string = this.stats.mp + ' ';
+        this.dmgRange.string = this.stats.attack_min + "~" + this.stats.attack_max+ ' ';
+        this.innerPower.string = this.stats.inner_power + ' ';
+        this.accuracy.string = this.stats.accuracy + ' ';
+        this.evasion.string = this.stats.evasion + ' ';
+        this.speed.string = this.stats.speed + ' ';
+        this.defence.string = this.stats.defence+ ' ';
+        this.critChance.string = this.stats.crit_chance + "%";
+        this.critDamage.string = this.stats.crit_damage + "%";
+        this.reduceDef.string = this.stats.reduce_def+ ' ';
+        this.reduceDefPerc.string = this.stats.reduce_def_perc + "%";
+        this.hpRegen.string = this.stats.hp_regen + ' ';
+        this.mpRegen.string = this.stats.mp_regen + ' ';
+        this.goldRes.string = this.stats.gold_res + ' ';
+        this.woodRes.string = this.stats.wood_res + ' ';
+        this.waterRes.string = this.stats.water_res + ' ';
+        this.fireRes.string = this.stats.fire_res + ' ';
+        this.earthRes.string = this.stats.earth_res + ' ';
+        this.hpOnHit.string = this.stats.hp_on_hit + ' ';
+        this.hpSteal.string = this.stats.hp_steal + "%";
+        this.mpOnHit.string = this.stats.mp_on_hit + ' ';
+        this.mpSteal.string = this.stats.mp_steal + "%"; 
+        this.remaining.string = (this.assignable - this.used)+ ' ';
+
+        // maybe have a class or something
+        this.strengthLabel.string = (this.assignedStrength + this.strength).toString();
+        this.dexterityLabel.string = (this.assignedDexterity + this.dexterity).toString();
+        this.physiqueLabel.string = (this.assignedPhysique + this.physique).toString();
+        this.spiritLabel.string = (this.assignedSpirit + this.spirit).toString();
     },
 });
