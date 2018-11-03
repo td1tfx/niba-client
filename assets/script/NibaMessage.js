@@ -44,6 +44,21 @@ var Message = {
         };
     },
 
+    CreateRequest(name, isMale, attributes) {
+        return {
+            type: 2,
+            name: name,
+            gender: isMale? 0 : 1,
+            attrs: attributes,
+            validate() {
+                if (this.name.length == 0) {
+                    return Result(false, '角色名不能为空');
+                }
+                return Result(true, '');
+            }
+        };
+    },
+
 };
 
 module.exports = Message;

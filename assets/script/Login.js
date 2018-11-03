@@ -110,6 +110,7 @@ cc.Class({
                     // transition to next scene
                     this.loginBtn.node.active = false;
                     this.registerNewBtn.node.active = false;
+                    cc.director.loadScene("CreateChar");
                 } else {
                     alert("账号密码错误");
                 }
